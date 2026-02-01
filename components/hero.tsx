@@ -1,24 +1,64 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 import heroCover from "@/assets/hero-cover.jpg";
 import PaymentModal from "./PaymentModal";
+import AudioVisualizer from "./AudioVisualizer";
+
+// Replace with your actual audio file path (e.g., "/audio/world-best-lie.mp3" in public folder)
+const AUDIO_URL = "/audio/world-best-lie.mp3";
 
 const Hero = () => {
     const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isMuted, setIsMuted] = useState(false);
+    const [hasInteracted, setHasInteracted] = useState(false);
+    const audioRef = useRef<HTMLAudioElement>(null);
+
+    useEffect(() => {
+        const handleFirstInteraction = () => {
+            if (!hasInteracted && audioRef.current) {
+                setHasInteracted(true);
+                audioRef.current.play().then(() => {
+                    setIsPlaying(true);
+                }).catch(() => { });
+            }
+        };
+        document.addEventListener("click", handleFirstInteraction, { once: true });
+        return () => document.removeEventListener("click", handleFirstInteraction);
+    }, [hasInteracted]);
+
+    const togglePlay = () => {
+        if (audioRef.current) {
+            if (isPlaying) {
+                audioRef.current.pause();
+            } else {
+                audioRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
+
+    const toggleMute = () => {
+        if (audioRef.current) {
+            audioRef.current.muted = !isMuted;
+            setIsMuted(!isMuted);
+        }
+    };
 
     return (
         <section className="relative min-h-screen w-full bg-background overflow-hidden">
+            <audio ref={audioRef} src={AUDIO_URL} loop preload="auto" />
             {/* Background image */}
             <div className="absolute inset-0">
                 <img
-                    src="/images/covers/cover-dark.png"
+                    src="/images/covers/cover-dark-gold.jpg"
                     alt="Nuno Zigi Total Dominance Cover"
                     className="w-full h-full object-cover object-center scale-105"
                 />
             </div>
-            {/*  */}
 
             {/* Overlay for cinematic mood */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
@@ -60,6 +100,75 @@ const Hero = () => {
 
             {/* Main title stack – centered */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
+                {/* Audio Player - Above Title */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2, duration: 0.8 }}
+                    className="mb-6 sm:mb-8"
+                >
+                    <div className="border border-primary/30 rounded-2xl shadow-card px-6 py-4 sm:px-8 sm:py-5 flex items-center gap-4 sm:gap-6">
+                        {/* Play/Pause Button */}
+                        <motion.button
+                            whileHover={{ scale: 1.15 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={togglePlay}
+                            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary flex items-center justify-center text-primary-foreground transition-all duration-300 hover:glow-gold"
+                        >
+                            {isPlaying ? (
+                                <Pause className="w-6 h-6 sm:w-7 sm:h-7" />
+                            ) : (
+                                <Play className="w-6 h-6 sm:w-7 sm:h-7 ml-1" />
+                            )}
+                        </motion.button>
+
+                        {/* Visualizer & Status */}
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="flex items-end justify-center gap-1.5 h-10 w-20">
+                                {[0, 0.1, 0.2, 0.15, 0.25, 0.08, 0.18].map((delay, index) => (
+                                    <motion.div
+                                        key={index}
+                                        className="w-1.5 bg-primary rounded-full origin-bottom"
+                                        initial={{ scaleY: 0.3 }}
+                                        animate={
+                                            isPlaying
+                                                ? {
+                                                    scaleY: [0.3, 1, 0.5, 0.8, 0.3],
+                                                    transition: {
+                                                        duration: 0.8,
+                                                        repeat: Infinity,
+                                                        delay: delay,
+                                                        ease: "easeInOut",
+                                                    },
+                                                }
+                                                : { scaleY: 0.3 }
+                                        }
+                                        style={{ height: `${40 + index * 8}%` }}
+                                    />
+                                ))}
+                            </div>
+                            {/* <span className="text-xs sm:text-sm text-primary uppercase tracking-widest font-bold">
+                                {isPlaying ? "Now Playing" : "Tap to Play"}
+                            </span> */}
+                        </div>
+
+                        {/* Mute Button */}
+                        <motion.button
+                            whileHover={{ scale: 1.15 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={toggleMute}
+                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-secondary flex items-center justify-center text-primary transition-all duration-300 hover:bg-primary/20"
+                        >
+                            {isMuted ? (
+                                <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" />
+                            ) : (
+                                <Volume2 className="w-5 h-5 sm:w-6 sm:h-6" />
+                            )}
+                        </motion.button>
+                    </div>
+                </motion.div>
+
+                {/* Title Stack */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}

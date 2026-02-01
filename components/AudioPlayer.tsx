@@ -77,7 +77,7 @@ const AudioPlayer = () => {
         <div className="flex flex-col items-start gap-1">
           <AudioVisualizer isPlaying={isPlaying} />
           <span className="text-xs text-muted-foreground uppercase tracking-wider">
-            {isPlaying ? "Now Playing" : "Paused"}
+            {/* {isPlaying ? "Now Playing" : "Paused"} */}
           </span>
         </div>
 

@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="bg-black text-[#EDE4D9] font-montserrat">
       <Hero />
-      <AudioPlayer />
+      {/* <AudioPlayer /> */}
       <Footer />
     </div>
   );
