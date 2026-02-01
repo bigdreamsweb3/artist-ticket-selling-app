@@ -18,6 +18,7 @@ const Hero = () => {
                     className="w-full h-full object-cover object-center scale-105"
                 />
             </div>
+            {/*  */}
 
             {/* Overlay for cinematic mood */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
