@@ -17,16 +17,16 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
   const [copied, setCopied] = useState<string | null>(null);
 
   const bankDetails = {
-    accountNumber: "9032806102",
-    bankName: "Opay",
-    accountName: "Kayfire Manager",
+    accountNumber: "6173012241",
+    bankName: "Fidelity Bank PLC",
+    accountName: "Ayadinuno okechukwu Obiora",
     amountNaira: "₦29,000",
     amountUSD: "$20",
   };
 
   const cryptoDetails = {
-    wallet: "0x742d35Cc6634C0532925a3b844Bc9e7595f2...",
-    network: "BNB Smart Chain (BEP20)",
+    wallet: "ТЕНZЗDaZWR8YoMQzioa4M4hbqAqurPMbES",
+    network: "USDT (TRC20)",
     amountUSD: "$20",
   };
 
@@ -183,7 +183,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
                         <p className="text-3xl font-black text-primary">
                           {cryptoDetails.amountUSD}
                         </p>
-                        <p className="text-xs text-muted-foreground">in USDT/BNB</p>
+                        <p className="text-xs text-muted-foreground">in USDT/TRON</p>
                       </div>
 
                       {/* Crypto Details */}

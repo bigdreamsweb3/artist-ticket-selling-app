@@ -107,7 +107,7 @@ const Hero = () => {
                     transition={{ delay: 0.2, duration: 0.8 }}
                     className="mb-6 sm:mb-8"
                 >
-                    <div className="border border-primary/30 rounded-2xl shadow-card px-6 py-4 sm:px-8 sm:py-5 flex items-center gap-4 sm:gap-6">
+                    <div className="border-b-2 border-primary/30 px-6 py-4 sm:px-8 sm:py-5 flex items-center gap-4 sm:gap-6">
                         {/* Play/Pause Button */}
                         <motion.button
                             whileHover={{ scale: 1.15 }}
