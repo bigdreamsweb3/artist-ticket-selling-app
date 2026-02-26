@@ -6,7 +6,7 @@ A modern web application for selling tickets to live shows, concerts, meet-and-g
 
 ## Built For
 
-This project was custom-built for **Nuno Zigi** ([@Nuno_zigi](https://x.com/Nuno_zigi)), the Nigerian rapper, songwriter, and pioneer of the "Afro-Lamba" sound (a fusion of hip-hop and Afro-pop).
+This project was custom-built for **Nuno Zigi** ([@Nuno_zigi on X/Twitter](https://x.com/Nuno_zigi)), the Nigerian rapper, songwriter, and pioneer of the "Afro-Lamba" sound (a fusion of hip-hop and Afro-pop).
 
 Nuno Zigi (born Obiora Okechukwu Ayadinuno) is known for his lyricism, unfiltered storytelling, and hits that blend Igbo rap with contemporary Afro-music vibes. With monthly listeners in the hundreds of thousands on Spotify, growing fanbase across platforms, and releases like _NO DAY OFF_ (2022) and _Total Dominance_, he continues to establish himself as one of the most important voices in his generation.
 
